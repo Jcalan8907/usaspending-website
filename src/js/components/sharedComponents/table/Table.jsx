@@ -22,7 +22,7 @@ const propTypes = {
 const Table = (props) => (
     <table className="usda-table">
         <thead className="usda-table__head">
-            <tr>
+            <tr className="usda-table__row">
                 {props.columns.map((col) => (
                     <TableHeader
                         key={col.title}
@@ -34,22 +34,30 @@ const Table = (props) => (
             </tr>
         </thead>
         <tbody className="usda-table__body">
-            {props.rows.map((row) => {
+            {props.rows.map((row, i) => {
+                // Use a class name for alternating gray/white rows
+                // because child rows do not get the same treatment
+                const oddClass = i % 2 === 0 ? '' : ' usda-table__row_odd';
                 if (props.expandable) {
                     return (
                         <ExpandableRow
                             key={row.name}
                             data={row}
+                            oddClass={oddClass}
                             columns={props.columns.map(({ title }) => title)} />
                     );
                 }
-                return row.map((data, i) => (
-                    <td
-                        key={`${props.columns[i].title}-${i}`}
-                        className="usada-table__cell">
-                        {data}
-                    </td>
-                ));
+                return (
+                    <tr className={`usda-table__row${oddClass}`}>
+                        {row.map((data, j) => (
+                            <td
+                                key={`${props.columns[j].title}-${j}`}
+                                className="usda-table__cell">
+                                {data}
+                            </td>
+                        ))}
+                    </tr>
+                );
             })}
         </tbody>
     </table>

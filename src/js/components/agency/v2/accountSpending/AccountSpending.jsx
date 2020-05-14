@@ -32,12 +32,12 @@ const mockCols = [
     }
 ];
 
-const mockRows = [
+const mockExpandableRows = [
     {
         name: 'Transportation',
         obligated_amount: '$4,982.19',
         gross_outlay_amount: '$4,982.19',
-        percent: '50%'
+        percent: '25%'
     },
     {
         name: 'Health',
@@ -49,10 +49,35 @@ const mockRows = [
                 name: 'Health care services',
                 obligated_amount: '$4,982.19',
                 gross_outlay_amount: '$4,982.19',
-                percent: '100%'
+                percent: '50%'
+            }
+        ]
+    },
+    {
+        name: 'General Science',
+        obligated_amount: '$4,982.19',
+        gross_outlay_amount: '$4,982.19',
+        percent: '25%',
+        children: [
+            {
+                name: 'Space flight',
+                obligated_amount: '$4,982.19',
+                gross_outlay_amount: '$4,982.19',
+                percent: '20%'
+            },
+            {
+                name: 'Basic research',
+                obligated_amount: '$4,982.19',
+                gross_outlay_amount: '$4,982.19',
+                percent: '5%'
             }
         ]
     }
+];
+
+const mockRows = [
+    ['mock data', 'mock data', 'mock data', 'mock data'],
+    ['mock data', 'mock data', 'mock data', 'mock data']
 ];
 
 const tabs = [
@@ -114,9 +139,14 @@ const AccountSpending = ({ agencyId, fy }) => {
             <Table
                 columns={mockCols}
                 updateSort={updateSort}
-                rows={mockRows}
+                rows={mockExpandableRows}
                 currentSort={{ field: 'obligated_amount', direction: 'asc' }}
                 expandable />
+            <Table
+                columns={mockCols}
+                updateSort={updateSort}
+                rows={mockRows}
+                currentSort={{ field: 'obligated_amount', direction: 'asc' }} />
         </div>
     );
 };

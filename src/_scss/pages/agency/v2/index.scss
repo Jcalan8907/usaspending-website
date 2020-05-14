@@ -185,6 +185,7 @@
     }
 
     .main-content {
+        @import '../../../components/table';
         @include display(flex);
         width: 100%;
         @include flex-grow(1);
