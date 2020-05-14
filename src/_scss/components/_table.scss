@@ -44,17 +44,9 @@ table.usda-table {
                     }
                 }
             }
-            &.usda-table__child-row_first {
-                // add space above the border on the first row's first cell
+            &.usda-table__row_odd {
                 td.usda-table__cell {
-                    &.usda-table__cell_child {
-                        &:first-of-type {
-                            padding-top: rem(3);
-                            .usda-table__child-cell-content {
-                                padding-top: rem(7);
-                            }
-                        }
-                    }
+                    background-color: $color-gray-lightest;
                 }
             }
             &.usda-table__child-row_last {
@@ -62,9 +54,9 @@ table.usda-table {
                 td.usda-table__cell {
                     &.usda-table__cell_child {
                         &:first-of-type {
-                            padding-bottom: rem(3);
+                            padding-bottom: rem(5);
                             .usda-table__child-cell-content {
-                                padding-bottom: rem(7);
+                                padding-bottom: rem(5);
                             }
                         }
                     }

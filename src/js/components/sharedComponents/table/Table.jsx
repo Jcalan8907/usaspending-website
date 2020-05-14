@@ -36,7 +36,7 @@ const Table = (props) => (
         <tbody className="usda-table__body">
             {props.rows.map((row, i) => {
                 // Use a class name for alternating gray/white rows
-                // because child rows do not get the same treatment
+                // because child rows should match their parent
                 const oddClass = i % 2 === 0 ? '' : ' usda-table__row_odd';
                 if (props.expandable) {
                     return (

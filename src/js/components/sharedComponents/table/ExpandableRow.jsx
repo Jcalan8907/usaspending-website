@@ -41,10 +41,9 @@ const ExpandableRow = ({ data, columns, oddClass }) => {
             </tr>
             {data.children && expanded ? (
                 data.children.map((childRow, i) => {
-                    const firstClass = i === 0 ? ' usda-table__child-row_first' : '';
                     const lastClass = i === data.children.length - 1 ? ' usda-table__child-row_last' : '';
                     return (
-                        <tr className={`usda-table__child-row${firstClass}${lastClass}`}>
+                        <tr className={`usda-table__child-row${lastClass}${oddClass}`}>
                             {columns.map((col) => (
                                 <td className="usda-table__cell usda-table__cell_child">
                                     <div className="usda-table__child-cell-content">
