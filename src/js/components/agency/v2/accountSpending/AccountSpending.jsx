@@ -6,11 +6,46 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import CountTabContainer from 'containers/agency/v2/accountSpending/CountTabContainer';
+import Table from 'components/sharedComponents/table/Table';
 
 const propTypes = {
     fy: PropTypes.string,
     agencyId: PropTypes.string
 };
+
+const mockCols = [
+    {
+        title: 'budgetFunction',
+        displayName: 'Budget Function'
+    },
+    {
+        title: 'obligatedAmount',
+        displayName: 'Obligated Amount'
+    },
+    {
+        title: 'percentObligations',
+        displayName: '% of Total Obligations'
+    },
+    {
+        title: 'outlay',
+        displayName: 'Gross Outlay Amount'
+    }
+];
+
+const mockRows = [
+    [
+        'mock data', 'mock data', 'mock data', (<a href="/">Link</a>)
+    ],
+    [
+        'mock data', 'mock data', 'mock data', 'mock data'
+    ],
+    [
+        'mock data', 'mock data', 'mock data', 'mock data'
+    ],
+    [
+        'mock data', 'mock data', 'mock data', 'mock data'
+    ]
+];
 
 const tabs = [
     {
@@ -45,6 +80,7 @@ const tabs = [
 
 const AccountSpending = ({ agencyId, fy }) => {
     const [activeTab, setActiveTab] = useState('budget_function');
+    const updateSort = (field, direction) => console.log(field, direction);
     return (
         <div className="body__content">
             <div className="count-tabs">
@@ -67,6 +103,11 @@ const AccountSpending = ({ agencyId, fy }) => {
                     ))}
                 </div>
             </div>
+            <Table
+                columns={mockCols}
+                updateSort={updateSort}
+                rows={mockRows}
+                currentSort={{ field: 'obligatedAmount', direction: 'asc' }} />
         </div>
     );
 };

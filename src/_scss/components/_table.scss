@@ -1,0 +1,18 @@
+table.usda-table {
+    thead.usda-table__head {
+        @import './table/tableHeader';
+    }
+    tbody.usda-table__body {
+        font-size: rem(18);
+        tr.usda-table__row {
+            &:nth-of-type(odd){
+                td.usda-table__cell {
+                    background-color: $color-gray-lightest;
+                }
+            }
+            td.usda-table__cell {
+                border: 0;
+            }
+        }
+    }
+}
