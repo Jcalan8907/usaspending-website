@@ -15,36 +15,44 @@ const propTypes = {
 
 const mockCols = [
     {
-        title: 'budgetFunction',
+        title: 'name',
         displayName: 'Budget Function'
     },
     {
-        title: 'obligatedAmount',
+        title: 'obligated_amount',
         displayName: 'Obligated Amount'
     },
     {
-        title: 'percentObligations',
+        title: 'percent',
         displayName: '% of Total Obligations'
     },
     {
-        title: 'outlay',
+        title: 'gross_outlay_amount',
         displayName: 'Gross Outlay Amount'
     }
 ];
 
 const mockRows = [
-    [
-        'mock data', 'mock data', 'mock data', (<a href="/">Link</a>)
-    ],
-    [
-        'mock data', 'mock data', 'mock data', 'mock data'
-    ],
-    [
-        'mock data', 'mock data', 'mock data', 'mock data'
-    ],
-    [
-        'mock data', 'mock data', 'mock data', 'mock data'
-    ]
+    {
+        name: 'Transportation',
+        obligated_amount: '$4,982.19',
+        gross_outlay_amount: '$4,982.19',
+        percent: '50%'
+    },
+    {
+        name: 'Health',
+        obligated_amount: '$4,982.19',
+        gross_outlay_amount: '$4,982.19',
+        percent: '50%',
+        children: [
+            {
+                name: 'Health care services',
+                obligated_amount: '$4,982.19',
+                gross_outlay_amount: '$4,982.19',
+                percent: '100%'
+            }
+        ]
+    }
 ];
 
 const tabs = [
@@ -107,7 +115,8 @@ const AccountSpending = ({ agencyId, fy }) => {
                 columns={mockCols}
                 updateSort={updateSort}
                 rows={mockRows}
-                currentSort={{ field: 'obligatedAmount', direction: 'asc' }} />
+                currentSort={{ field: 'obligated_amount', direction: 'asc' }}
+                expandable />
         </div>
     );
 };

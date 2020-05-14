@@ -6,6 +6,7 @@
 import React from 'react';
 import PropTypes, { shape, oneOf } from 'prop-types';
 import TableHeader from './TableHeader';
+import ExpandableRow from './ExpandableRow';
 
 const propTypes = {
     columns: PropTypes.arrayOf(PropTypes.object),
@@ -14,7 +15,8 @@ const propTypes = {
         direction: oneOf(['asc', 'desc']),
         field: PropTypes.string
     }),
-    updateSort: PropTypes.func.isRequired
+    updateSort: PropTypes.func.isRequired,
+    expandable: PropTypes.bool
 };
 
 const Table = (props) => (
@@ -32,15 +34,23 @@ const Table = (props) => (
             </tr>
         </thead>
         <tbody className="usda-table__body">
-            {props.rows.map((row) => (
-                <tr className="usda-table__row">
-                    {row.map((data) => (
-                        <td className="usda-table__cell">
-                            {data}
-                        </td>
-                    ))}
-                </tr>
-            ))}
+            {props.rows.map((row) => {
+                if (props.expandable) {
+                    return (
+                        <ExpandableRow
+                            key={row.name}
+                            data={row}
+                            columns={props.columns.map(({ title }) => title)} />
+                    );
+                }
+                return row.map((data, i) => (
+                    <td
+                        key={`${props.columns[i].title}-${i}`}
+                        className="usada-table__cell">
+                        {data}
+                    </td>
+                ));
+            })}
         </tbody>
     </table>
 );
