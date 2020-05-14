@@ -19,10 +19,12 @@ const ExpandableRow = ({ data, columns, oddClass }) => {
     return (
         <>
             <tr className={`usda-table__row${oddClass} usda-table__row_expandable`}>
-                {columns.map((col) => {
+                {columns.map((col, i) => {
                     if (col === 'name' && data.children) {
                         return (
-                            <td className="usda-table__cell">
+                            <td
+                                key={`${data.name}`}
+                                className="usda-table__cell">
                                 <button
                                     className="usda-table__expand-button"
                                     onClick={() => setExpanded(!expanded)}>
@@ -33,19 +35,25 @@ const ExpandableRow = ({ data, columns, oddClass }) => {
                         );
                     }
                     return (
-                        <td className={`usda-table__cell${col === 'name' ? ' usda-table__cell_name' : ''}`}>
+                        <td
+                            key={`${col}-${i}`}
+                            className={`usda-table__cell${col === 'name' ? ' usda-table__cell_name' : ''}`}>
                             {data[col]}
                         </td>
                     );
                 })}
             </tr>
             {data.children && expanded ? (
-                data.children.map((childRow, i) => {
-                    const lastClass = i === data.children.length - 1 ? ' usda-table__child-row_last' : '';
+                data.children.map((childRow, j) => {
+                    const lastClass = j === data.children.length - 1 ? ' usda-table__child-row_last' : '';
                     return (
-                        <tr className={`usda-table__child-row${lastClass}${oddClass}`}>
-                            {columns.map((col) => (
-                                <td className="usda-table__cell usda-table__cell_child">
+                        <tr
+                            key={`${data.name}-child-${j}`}
+                            className={`usda-table__child-row${lastClass}${oddClass}`}>
+                            {columns.map((col, k) => (
+                                <td
+                                    key={`${data.name}-row-${j}-col${k}`}
+                                    className="usda-table__cell usda-table__cell_child">
                                     <div className="usda-table__child-cell-content">
                                         {childRow[col]}
                                     </div>

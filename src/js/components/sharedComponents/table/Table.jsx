@@ -4,13 +4,13 @@
  */
 
 import React from 'react';
-import PropTypes, { shape, oneOf } from 'prop-types';
+import PropTypes, { shape, oneOf, oneOfType } from 'prop-types';
 import TableHeader from './TableHeader';
 import ExpandableRow from './ExpandableRow';
 
 const propTypes = {
     columns: PropTypes.arrayOf(PropTypes.object),
-    rows: PropTypes.arrayOf(PropTypes.array),
+    rows: oneOfType([PropTypes.array, PropTypes.object]),
     currentSort: shape({
         direction: oneOf(['asc', 'desc']),
         field: PropTypes.string
@@ -48,7 +48,9 @@ const Table = (props) => (
                     );
                 }
                 return (
-                    <tr className={`usda-table__row${oddClass}`}>
+                    <tr
+                        key={`row-${i}`}
+                        className={`usda-table__row${oddClass}`}>
                         {row.map((data, j) => (
                             <td
                                 key={`${props.columns[j].title}-${j}`}
